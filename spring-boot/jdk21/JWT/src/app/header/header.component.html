@@ -1,0 +1,7 @@
+<div>    
+    @if (this.isLoggedIn) {
+      <a routerLink="/dashboard">Dashboard</a>
+      <button (click)="onLogout()">Logout</button>
+    }   
+    @else {<a routerLink="/login">Login</a>} 
+  </div>

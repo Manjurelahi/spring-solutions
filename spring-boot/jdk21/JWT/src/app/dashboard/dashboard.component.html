@@ -1,0 +1,9 @@
+<div>
+    @if (this.isAdmin) {
+        <li><a routerLink="/admin">Admin Profile</a></li>
+    }
+    @else if (this.isUser) {
+        <li><a routerLink="/user">User Profile</a></li>
+    }
+</div>
+

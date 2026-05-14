@@ -1,0 +1,12 @@
+<div>
+  @if (!isLoggedIn) {
+    <form [formGroup]="loginForm", (ngSubmit)="onLogin()">
+        <input id="username" type="text" formControlName="username" placeholder="E-Mail ID">
+        <br><br>
+        <input id="password" type="password" formControlName="password" placeholder="Password">
+        <br><br>
+        <button id="submit" type="submit" [disabled]="loginForm.invalid"> Submit </button>
+      </form>
+  }
+</div>
+
