@@ -10,6 +10,8 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Service;
 import springboot.jdk21.jwt.entity.User;
 import springboot.jdk21.jwt.repository.UserRepository;
@@ -32,17 +34,14 @@ public class JWTService {
   public UserDetails authenticate(User user, HttpServletRequest request, HttpServletResponse response) {
     authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
     SecurityContext context = SecurityContextHolder.createEmptyContext();
-    //SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
-
+    SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
     UserDetails userDetails = customUserDetailsService.loadUserByUsername(user.getUsername());
     UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
     context.setAuthentication(authToken);
     SecurityContextHolder.setContext(context);
-    //securityContextRepository.saveContext(context, request, response);
+    securityContextRepository.saveContext(context, request, response);
     return userDetails;
-
-
   }
 
   public ResponseCookie getCleanJwtCookie() {

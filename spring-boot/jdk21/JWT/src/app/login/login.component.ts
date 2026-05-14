@@ -1,8 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormsModule, NgForm } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormControl, Validators, FormsModule } from '@angular/forms';
 import { AuthService } from '../service/auth.service';
-import { Router, RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "../header/header.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -27,13 +26,11 @@ export class LoginComponent implements OnInit {
     }
   }
 
-
   ngOnInit(): void {
     if (this.isLoggedIn) {
       this.loginSuccess();
     }
   }
-
 
   loginSuccess() {
     this.isLoggedIn = true;
@@ -44,7 +41,6 @@ export class LoginComponent implements OnInit {
     this.authService.isLoggedInSignal.set(true);
     this.router.navigateByUrl('dashboard');
   }
-
 
   onLogin() {
     if (this.loginForm.valid) {
@@ -60,7 +56,6 @@ export class LoginComponent implements OnInit {
       throw new Error('Login Form is not valid');
     }
   }
-
 }
 
 

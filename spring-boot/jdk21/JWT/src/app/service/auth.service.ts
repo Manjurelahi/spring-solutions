@@ -26,9 +26,7 @@ export class AuthService {
       return true;
     }
     return false;
-  }
-
- 
+  } 
 
   isAdmin():boolean {
     if ('ROLE_ADMIN'===localStorage.getItem('role')) {
@@ -50,9 +48,6 @@ export class AuthService {
     localStorage.removeItem('isLoggedIn');
     this.isLoggedInSignal.set(false);
     return this.http.post("http://localhost:8080/api/v1/logout", {}, 
-    {headers: new HttpHeaders({"X-XSRF-TOKEN": 
-    //this.xsrfToken}), withCredentials: true});
-    document.cookie.replace(/(?:(?:^|.*;\s*)XSRF-TOKEN\s*\=\s*([^;]*).*$)|^.*$/, '$1')}), withCredentials: true});
-    
+    {headers: new HttpHeaders({"X-XSRF-TOKEN": this.xsrfToken}), withCredentials: true});    
   }
 }

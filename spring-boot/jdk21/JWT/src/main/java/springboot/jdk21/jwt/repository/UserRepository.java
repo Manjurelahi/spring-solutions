@@ -29,8 +29,8 @@ public class UserRepository {
   }
 
   public List<User> getUserList() {
-    return List.of(new User("tony.stark@email.com", encodePassword("IronMan@1Admin"), "ADMIN"),
-      new User("peter.parker@email.com", encodePassword("SpiderMan@1User"), "USER"));
+    return List.of(new User("admin.employee@company.com", encodePassword("employee@1Admin"), "ADMIN"),
+      new User("user.employee@company.com", encodePassword("employee@1User"), "USER"));
   }
 
   public Optional<User> findByUsername(String username) {

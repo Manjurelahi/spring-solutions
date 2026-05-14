@@ -11,6 +11,8 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 import springboot.jdk21.jwt.repository.UserRepository;
@@ -48,14 +50,14 @@ public class JWTFilter extends OncePerRequestFilter {
     }
     if (token != null && jwtUtil.validateToken(token)) {
       SecurityContext context = SecurityContextHolder.createEmptyContext();
-      //SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
+      SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
       String username = jwtUtil.extractUsername(token);
       UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
       UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
       authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
       context.setAuthentication(authToken);
       SecurityContextHolder.setContext(context);
-      //securityContextRepository.saveContext(context, request, response);
+      securityContextRepository.saveContext(context, request, response);
     }
     filterChain.doFilter(request, response);
   }
