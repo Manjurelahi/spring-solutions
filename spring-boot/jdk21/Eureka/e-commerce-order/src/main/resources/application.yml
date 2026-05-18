@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: order-service
+  webflux:
+    webclient: true
+server:
+  port: 8082
