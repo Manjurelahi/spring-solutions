@@ -1,6 +1,6 @@
-package circuitbreaker.resilience4j.service;
+package circuitbreaker.springretry.service;
 
-import circuitbreaker.resilience4j.model.Product;
+import circuitbreaker.springretry.model.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

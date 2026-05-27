@@ -1,4 +1,4 @@
-package circuitbreaker.resilience4j;
+package circuitbreaker.springretry;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

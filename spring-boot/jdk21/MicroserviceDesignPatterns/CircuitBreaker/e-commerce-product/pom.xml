@@ -3,9 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.ecommerce.product</groupId>
-    <artifactId>E-COMMERCE-PRODUCT-API</artifactId>
+    <artifactId>e-commerce-product</artifactId>
     <version>1.0.0</version>
-    <name>E-COMMERCE-PRODUCT-API</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>

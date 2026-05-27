@@ -1,4 +1,4 @@
-package circuitbreaker.resilience4j.model;
+package circuitbreaker.springretry.model;
 
 public class Product {
     private int productId;
