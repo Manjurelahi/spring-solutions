@@ -16,18 +16,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
-public class OrderCreatedEventConsumer {
-    private Logger logger =  LoggerFactory.getLogger(OrderCreatedEventConsumer.class);
+public class StockConsumer {
+    private final Logger logger =  LoggerFactory.getLogger(StockConsumer.class);
     private final WebClient webClient;
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
-    public OrderCreatedEventConsumer(WebClient webClient, KafkaTemplate<String, Object> kafkaTemplate) {
+    public StockConsumer(WebClient webClient, KafkaTemplate<String, Object> kafkaTemplate) {
         this.webClient = webClient;
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    @KafkaListener(topics = KafkaTopics.ORDER_CREATED, groupId = "stock")
-    public void orderCreated(ConsumerRecord<String, OrderCreatedEvent> record) {
+    @KafkaListener(topics = KafkaTopics.ORDER_IN_PROGRESS, groupId = "stock")
+    public void orderInProgress(ConsumerRecord<String, OrderCreatedEvent> record) {
         OrderCreatedEvent orderCreatedEvent = record.value();
         logger.info("Received OrderCreatedEvent: {}", orderCreatedEvent);
         Integer productId = orderCreatedEvent.productId();
@@ -35,7 +35,7 @@ public class OrderCreatedEventConsumer {
                 .retrieve().bodyToMono(Product.class).subscribe(
                         product ->  {
                             logger.info("Received Product: {}", product);
-                            if (product.getIsInStock().booleanValue()) {
+                            if (product.getIsInStock()) {
                                 OrderConfirmedEvent orderConfirmedEvent = new OrderConfirmedEvent(
                                         new Order(orderCreatedEvent.orderId(), product),
                                         new User(orderCreatedEvent.userId(), 15000)

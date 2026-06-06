@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>springboot.jdk21.saga</groupId>
-    <artifactId>Choreography</artifactId>
+    <artifactId>Orchestration</artifactId>
     <version>1.0.0</version>
 	<packaging>pom</packaging>
 	<properties>
@@ -47,6 +47,7 @@
 		<module>e-commerce-order</module>
         <module>e-commerce-stock</module>
         <module>e-commerce-payment</module>
+        <module>e-commerce-order-orchestrator</module>
     </modules>
 	<build>
         <plugins>
